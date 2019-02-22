@@ -1,0 +1,6 @@
+﻿This folder contains ALL classes that compute algorithms, perform business logic, and translate data for the GUI/View of the program.
+
+This is where the heart of our program will be - we will call and use the Bird, Lime, Xamarin.Essentials, and etc. APIs here, plus code
+any algorithms and whatever else is necessary for computations.
+
+The ViewModel(s) transfer data to and from the Data Model(s) and View(s) via Data Binding so that our code is NOT tightly coupled.
