@@ -1,0 +1,2 @@
+﻿This folder will ONLY contain classes that hold data and connect to database and web-servers.
+NO business logic, algorithms, or computations of any kind go in this folder.
