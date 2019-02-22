@@ -1,2 +1,2 @@
-﻿This folder will ONLY contain classes that hold data and connect to database and web-servers.
+﻿This folder will ONLY contain classes that store local program data/variables/properties and connect to databases.
 NO business logic, algorithms, or computations of any kind go in this folder.
