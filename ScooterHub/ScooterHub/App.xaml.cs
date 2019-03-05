@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ScooterHub.Views;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,7 +12,8 @@ namespace ScooterHub
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            //MainPage = new MainPage();
+            MainPage = new MapPage();
         }
 
         protected override void OnStart()
