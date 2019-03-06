@@ -1,2 +1,3 @@
 ﻿This folder will ONLY contain classes that store local program data/variables/properties and connect to databases.
-NO business logic, algorithms, or computations of any kind go in this folder.
+
+We will call the Bird, Lime, etc. APIs and parse all scooter data here.

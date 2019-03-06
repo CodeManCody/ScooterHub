@@ -18,7 +18,7 @@ namespace ScooterHub.ViewModels
         public MapVM()
         {
             data = new MapData();
-            customizeMap();
+            createMap();
             addPins();
         }
 
@@ -39,7 +39,7 @@ namespace ScooterHub.ViewModels
                 map.Pins.Add(pin);
             }
         }
-        private void customizeMap()
+        private void createMap()
         {
             /* can't test on laptop...will test on real phone
             Task.Run(async () =>
