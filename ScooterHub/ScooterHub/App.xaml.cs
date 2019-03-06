@@ -13,7 +13,7 @@ namespace ScooterHub
             InitializeComponent();
 
             //MainPage = new MainPage();
-            MainPage = new MapPage();
+            MainPage = new MapUI();
         }
 
         protected override void OnStart()
