@@ -17,6 +17,30 @@ namespace ScooterHub.ViewModels
         private Location currentLocation { get; set; }
         public MapVM()
         {
+            data = new MapData();
+            customizeMap();
+            addPins();
+        }
+
+        private void addPins()
+        {
+            foreach (double[] location in data.coordinates)
+            {
+                var position = new Position(location[0], location[1]); // Latitude, Longitude
+
+                var pin = new Pin
+                {
+                    Type = PinType.Place,
+                    Position = position,
+                    Label = "custom pin",
+                    Address = "custom detail info"
+                };
+
+                map.Pins.Add(pin);
+            }
+        }
+        private void customizeMap()
+        {
             /* can't test on laptop...will test on real phone
             Task.Run(async () =>
             {
@@ -24,29 +48,16 @@ namespace ScooterHub.ViewModels
             });
             */
 
-            data = new MapData();
-
             map = new Xamarin.Forms.Maps.Map(
                 MapSpan.FromCenterAndRadius(
                         //new Position(currentLocation.Latitude, currentLocation.Longitude), Distance.FromMiles(0.3)))
-                        new Position(data.coordinates[0], data.coordinates[1]), Distance.FromMiles(0.3)))
+                        new Position(32.774209, -117.070028), Distance.FromMiles(0.3)))
             {
                 IsShowingUser = true,
                 HeightRequest = 100,
                 WidthRequest = 960,
                 VerticalOptions = LayoutOptions.FillAndExpand
             };
-
-            var position = new Position(data.coordinates[0], data.coordinates[1]); // Latitude, Longitude
-            var pin = new Pin
-            {
-                Type = PinType.Place,
-                Position = position,
-                Label = "custom pin",
-                Address = "custom detail info"
-            };
-
-            map.Pins.Add(pin);
         }
 
         private async Task getCurrentLocation()
