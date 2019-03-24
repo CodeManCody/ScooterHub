@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ScooterAPIs
+namespace ScooterHub.DataModels.Bird
 {
     // Bird Auth API
     public class BirdAuth

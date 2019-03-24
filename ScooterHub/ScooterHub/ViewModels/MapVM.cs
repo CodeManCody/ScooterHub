@@ -1,4 +1,5 @@
 ﻿using ScooterHub.DataModels;
+using ScooterHub.DataModels.Bird;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +13,13 @@ namespace ScooterHub.ViewModels
 {
     public class MapVM
     {
-        private MapData data;
+        private BirdData bData;
+        private MapData data; 
         public Xamarin.Forms.Maps.Map map { get; private set; }
-        private Location currentLocation { get; set; }
+        private Xamarin.Essentials.Location currentLocation { get; set; }
         public MapVM()
         {
+            bData = new BirdData();
             data = new MapData();
             createMap();
             addPins();

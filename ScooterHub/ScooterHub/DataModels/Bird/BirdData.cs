@@ -4,20 +4,20 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace ScooterAPIs
+namespace ScooterHub.DataModels.Bird
 {
-    class Program
+    public class BirdData
     {
         // Constants for demo
         const string DEVICE_ID = "123E4567-E89B-12D3-A456-426655440070";
-        const string EMAIL = "exmpl47@gmail.com";
+        const string EMAIL = "exmpl4700@gmail.com";
         const string LATITUDE = "32.7744339"; // Campus
         const string LONGITUDE = "-117.0693269";
         const string RADIUS = "25";
 
         static HttpClient client = new HttpClient();
 
-        static void Main(string[] args)
+        public BirdData()
         {
             // If you're looking for Main, look at RunAsync()
             RunAsync().GetAwaiter().GetResult();
@@ -39,9 +39,9 @@ namespace ScooterAPIs
             api = await GetBirdScootersAsync(auth.token, LATITUDE, LONGITUDE, RADIUS);
 
             // Print out info for each scooter found
-            Console.WriteLine($"Found {api.birds.Count} scooters!\n");
+            System.Diagnostics.Debug.WriteLine($"Found {api.birds.Count} scooters!\n");
             foreach (var scooter in api.birds)
-                Console.WriteLine($"Scooter {scooter.id}:\n    " +
+                System.Diagnostics.Debug.WriteLine($"Scooter {scooter.id}:\n    " +
                     $"Lat: {scooter.location.latitude}, " +
                     $"Long: {scooter.location.longitude}, " +
                     $"Battery: {scooter.battery_level}%\n");
