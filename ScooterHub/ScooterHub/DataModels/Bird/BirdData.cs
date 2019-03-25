@@ -8,9 +8,8 @@ namespace ScooterHub.DataModels.Bird
 {
     public class BirdData
     {
-        // Constants for demo
         const string DEVICE_ID = "123E4567-E89B-12D3-A456-426655440070";
-        const string EMAIL = "exmpl4700@gmail.com";
+        const string EMAIL = "exmpl4710@gmail.com";
         const string LATITUDE = "32.7744339"; // Campus
         const string LONGITUDE = "-117.0693269";
         const string RADIUS = "25";
@@ -19,8 +18,10 @@ namespace ScooterHub.DataModels.Bird
 
         public BirdData()
         {
-            // If you're looking for Main, look at RunAsync()
-            RunAsync().GetAwaiter().GetResult();
+            Task.Run(async () =>
+            {
+                await RunAsync();
+            });
         }
 
         static async Task RunAsync()

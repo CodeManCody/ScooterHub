@@ -1,4 +1,5 @@
-﻿using ScooterHub.ViewModels;
+﻿using ScooterHub.DataModels.Bird;
+using ScooterHub.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
