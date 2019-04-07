@@ -19,7 +19,7 @@ namespace ScooterHub.DataModels.Lime
         const string SW_LONG = "-117.0754787";
 
 
-        static void Main(string[] args)
+        static LimeData()
         {
             // Pick a demo to run
             //RunBirdAsync().GetAwaiter().GetResult();
