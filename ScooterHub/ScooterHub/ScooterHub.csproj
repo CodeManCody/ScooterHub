@@ -23,5 +23,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DataModels\Bird\" />
+    <Folder Include="DataModels\Lime\" />
   </ItemGroup>
 </Project>
