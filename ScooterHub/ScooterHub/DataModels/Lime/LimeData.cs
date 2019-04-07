@@ -21,10 +21,10 @@ namespace ScooterHub.DataModels.Lime
 
         static LimeData()
         {
-            // Pick a demo to run
-            //RunBirdAsync().GetAwaiter().GetResult();
-            RunLimeAsync().GetAwaiter().GetResult();
-            Console.ReadLine();
+            Task.Run(async () =>
+            {
+                await RunLimeAsync();
+            });
         }
 
         // Lime ====================================================================================
