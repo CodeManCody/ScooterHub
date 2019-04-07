@@ -1,5 +1,6 @@
 ﻿using ScooterHub.DataModels;
 using ScooterHub.DataModels.Bird;
+using ScooterHub.DataModels.Lime;
 using System;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
@@ -11,6 +12,7 @@ namespace ScooterHub.ViewModels
     public class MapVM
     {
         private BirdData birdData;
+        private LimeData limeData;
         private MapData data; 
         public Xamarin.Forms.Maps.Map map { get; private set; }
         private Xamarin.Essentials.Location currentLocation { get; set; }
@@ -21,6 +23,7 @@ namespace ScooterHub.ViewModels
             addPins();
 
             birdData = new BirdData();
+            limeData = new LimeData();
         }
 
         private void addPins()
