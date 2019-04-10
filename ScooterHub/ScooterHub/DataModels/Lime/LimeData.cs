@@ -12,7 +12,9 @@ namespace ScooterHub.DataModels.Lime
 {
     public class LimeData
     {
-        const string PHONE_NUM = ""; // ex: 16195555555
+        const string PHONE_NUM = "16196094177"; // ex: 16195555555
+        const string LATITUDE = "32.7744339"; // Campus
+        const string LONGITUDE = "-117.0693269";
         const string NE_LAT = "32.777734";
         const string NE_LONG = "-117.0709506";
         const string SW_LAT = "32.773503";
@@ -38,10 +40,10 @@ namespace ScooterHub.DataModels.Lime
              * Put the code you get texted in the GetLimeAuthAsync() call. */
             await GetLimeRegisterTokenAsync(PHONE_NUM);
 
-            /*
+            
             // Auth
             LimeAuth auth = new LimeAuth();
-            auth = await GetLimeAuthAsync(PHONE_NUM, "527544");
+            auth = await GetLimeAuthAsync(PHONE_NUM, "750266");
 
             // Make sure we have a valid token
             if (string.IsNullOrEmpty(auth.token))
@@ -53,13 +55,13 @@ namespace ScooterHub.DataModels.Lime
                 LATITUDE, LONGITUDE);
 
             // Print out info for each scooter found
-            Console.WriteLine($"Found {api.data.attributes.bikes.Count} scooters!\n");
+            System.Diagnostics.Debug.WriteLine($"Found {api.data.attributes.bikes.Count} scooters!\n");
             foreach (var scooter in api.data.attributes.bikes)
-                Console.WriteLine($"Scooter {scooter.id}:\n    " +
+                System.Diagnostics.Debug.WriteLine($"Scooter {scooter.id}:\n    " +
                     $"Lat: {scooter.attributes.latitude}, " +
                     $"Long: {scooter.attributes.longitude}, " +
                     $"Battery: {scooter.attributes.battery_level}\n");
-            */
+            
         }
 
         static async Task<Object> GetLimeRegisterTokenAsync(string phoneNum)

@@ -22,7 +22,7 @@ namespace ScooterHub.ViewModels
             createMap();
             addPins();
 
-            birdData = new BirdData();
+            //birdData = new BirdData();
             limeData = new LimeData();
         }
 
