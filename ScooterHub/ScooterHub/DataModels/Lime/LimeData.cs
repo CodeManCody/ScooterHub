@@ -20,9 +20,13 @@ namespace ScooterHub.DataModels.Lime
         const string SW_LAT = "32.773503";
         const string SW_LONG = "-117.0754787";
 
+        public LimeAPI limeAPI;
 
-        static LimeData()
+
+        public LimeData()
         {
+            limeAPI = new LimeAPI();
+
             Task.Run(async () =>
             {
                 await RunLimeAsync();
@@ -30,7 +34,7 @@ namespace ScooterHub.DataModels.Lime
         }
 
         // Lime ====================================================================================
-        static async Task RunLimeAsync()
+        async Task RunLimeAsync()
         {
             /* This call will send a token to your phone. In order for this to work you must
              * have a Lime account registered to your PHONE_NUM.
@@ -38,25 +42,25 @@ namespace ScooterHub.DataModels.Lime
              * Then uncomment the rest of this method and comment the line below to actually 
              * run the demo.
              * Put the code you get texted in the GetLimeAuthAsync() call. */
-            await GetLimeRegisterTokenAsync(PHONE_NUM);
+            //await GetLimeRegisterTokenAsync(PHONE_NUM);
 
             
             // Auth
             LimeAuth auth = new LimeAuth();
-            auth = await GetLimeAuthAsync(PHONE_NUM, "750266");
+            auth = await GetLimeAuthAsync(PHONE_NUM, "886542");
 
             // Make sure we have a valid token
             if (string.IsNullOrEmpty(auth.token))
                 throw new Exception("Failed to get proper Lime Auth Token");
-            
+
             // Use our token to call main Lime API to get a list of scooters
-            LimeAPI api = new LimeAPI();
-            api = await GetLimeScootersAsync(auth.token, auth.cookie, NE_LAT, NE_LONG, SW_LAT, SW_LONG,
+
+            limeAPI = await GetLimeScootersAsync(auth.token, auth.cookie, NE_LAT, NE_LONG, SW_LAT, SW_LONG,
                 LATITUDE, LONGITUDE);
 
             // Print out info for each scooter found
-            System.Diagnostics.Debug.WriteLine($"Found {api.data.attributes.bikes.Count} scooters!\n");
-            foreach (var scooter in api.data.attributes.bikes)
+            System.Diagnostics.Debug.WriteLine($"Found {limeAPI.data.attributes.bikes.Count} scooters!\n");
+            foreach (var scooter in limeAPI.data.attributes.bikes)
                 System.Diagnostics.Debug.WriteLine($"Scooter {scooter.id}:\n    " +
                     $"Lat: {scooter.attributes.latitude}, " +
                     $"Long: {scooter.attributes.longitude}, " +
