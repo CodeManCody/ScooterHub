@@ -12,7 +12,8 @@ namespace ScooterHub.DataModels.Lime
 {
     public class LimeData
     {
-        const string PHONE_NUM = "16196094177"; // ex: 16195555555
+        const string PHONE_NUM = "16615134564"; // ex: 16195555555
+        const string TOKEN = "709461";
         const string LATITUDE = "32.7744339"; // Campus
         const string LONGITUDE = "-117.0693269";
         const string NE_LAT = "32.777734";
@@ -44,12 +45,12 @@ namespace ScooterHub.DataModels.Lime
              * Then uncomment the rest of this method and comment the line below to actually 
              * run the demo.
              * Put the code you get texted in the GetLimeAuthAsync() call. */
-            //await GetLimeRegisterTokenAsync(PHONE_NUM);
+            await GetLimeRegisterTokenAsync(PHONE_NUM);
 
-            
+
             // Auth
             LimeAuth auth = new LimeAuth();
-            auth = await GetLimeAuthAsync(PHONE_NUM, "389534");
+            auth = await GetLimeAuthAsync(PHONE_NUM, TOKEN);
 
             // Make sure we have a valid token
             if (string.IsNullOrEmpty(auth.token))
@@ -67,7 +68,7 @@ namespace ScooterHub.DataModels.Lime
                     $"Lat: {scooter.attributes.latitude}, " +
                     $"Long: {scooter.attributes.longitude}, " +
                     $"Battery: {scooter.attributes.battery_level}\n");
-            
+
         }
 
         static async Task<Object> GetLimeRegisterTokenAsync(string phoneNum)

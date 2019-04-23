@@ -21,16 +21,22 @@ namespace ScooterHub.ViewModels
         {
             data = new MapData();
             createMap();
-            
-            //birdData = new BirdData();
+
             limeData = new LimeData();
             Task taskA = Task.Run(() => limeData.RunLimeAsync());
 
-            Task UITask = taskA.ContinueWith((addPins) =>
+            Task UITaskA = taskA.ContinueWith((addPins) =>
             {
                 this.addPins();
             }, TaskScheduler.FromCurrentSynchronizationContext());
 
+            birdData = new BirdData();
+            Task taskB = Task.Run(() => birdData.RunAsync());
+
+            Task UITaskB = taskB.ContinueWith((addPins) =>
+            {
+                this.addPins();
+            }, TaskScheduler.FromCurrentSynchronizationContext());
 
             //addPins();
         }
@@ -54,7 +60,7 @@ namespace ScooterHub.ViewModels
             }
             */
 
-            foreach (Bike scooter in limeData.limeAPI.data.attributes.bikes)
+            foreach (var scooter in limeData.limeAPI.data.attributes.bikes)
             {
                 var position = new Position(scooter.attributes.latitude, scooter.attributes.longitude);
 
@@ -63,13 +69,29 @@ namespace ScooterHub.ViewModels
                     Type = PinType.Place,
                     Position = position,
                     Label = "Lime scooter",
-                    Address = "custom detail info"
+                    Address = "lat: " + scooter.attributes.latitude + ", long: " + scooter.attributes.longitude
                 };
 
                 map.Pins.Add(pin);
             }
 
-            
+            foreach (var scooter in birdData.birdAPI.birds)
+            {
+                var position = new Position(scooter.location.latitude, scooter.location.longitude);
+
+                var pin = new Pin
+                {
+                    Type = PinType.Place,
+                    Position = position,
+                    Label = "Bird scooter",
+                    Address = "lat: " + scooter.location.latitude + ", long: " + scooter.location.longitude
+                };
+
+                map.Pins.Add(pin);
+            }
+
+
+
         }
         private void createMap()
         {

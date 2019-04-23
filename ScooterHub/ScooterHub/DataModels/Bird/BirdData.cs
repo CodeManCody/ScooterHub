@@ -9,22 +9,28 @@ namespace ScooterHub.DataModels.Bird
     public class BirdData
     {
         const string DEVICE_ID = "123E4567-E89B-12D3-A456-426655440070";
-        const string EMAIL = "exmpl4710@gmail.com";
+        const string EMAIL = "yeet11236@gmail.com";
         const string LATITUDE = "32.7744339"; // Campus
         const string LONGITUDE = "-117.0693269";
         const string RADIUS = "25";
+
+
+        public BirdAPI birdAPI;
 
         static HttpClient client = new HttpClient();
 
         public BirdData()
         {
+            birdAPI = new BirdAPI();
+            /*
             Task.Run(async () =>
             {
                 await RunAsync();
             });
+            */
         }
 
-        static async Task RunAsync()
+        public async Task RunAsync()
         {
             // Try to get bird auth token
             // Run our async Task which calls the Bird Auth API to get our auth token
@@ -36,12 +42,12 @@ namespace ScooterHub.DataModels.Bird
                 throw new Exception("Failed to get proper Bird Auth Token");
 
             // Use our token to call main Bird API to get a list of scooters
-            BirdAPI api = new BirdAPI();
-            api = await GetBirdScootersAsync(auth.token, LATITUDE, LONGITUDE, RADIUS);
+            //BirdAPI api = new BirdAPI();
+            birdAPI = await GetBirdScootersAsync(auth.token, LATITUDE, LONGITUDE, RADIUS);
 
             // Print out info for each scooter found
-            System.Diagnostics.Debug.WriteLine($"Found {api.birds.Count} scooters!\n");
-            foreach (var scooter in api.birds)
+            System.Diagnostics.Debug.WriteLine($"Found {birdAPI.birds.Count} scooters!\n");
+            foreach (var scooter in birdAPI.birds)
                 System.Diagnostics.Debug.WriteLine($"Scooter {scooter.id}:\n    " +
                     $"Lat: {scooter.location.latitude}, " +
                     $"Long: {scooter.location.longitude}, " +
