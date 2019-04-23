@@ -27,14 +27,16 @@ namespace ScooterHub.DataModels.Lime
         {
             limeAPI = new LimeAPI();
 
+            /*
             Task.Run(async () =>
             {
                 await RunLimeAsync();
             });
+            */
         }
 
         // Lime ====================================================================================
-        async Task RunLimeAsync()
+        public async Task RunLimeAsync()
         {
             /* This call will send a token to your phone. In order for this to work you must
              * have a Lime account registered to your PHONE_NUM.
@@ -47,7 +49,7 @@ namespace ScooterHub.DataModels.Lime
             
             // Auth
             LimeAuth auth = new LimeAuth();
-            auth = await GetLimeAuthAsync(PHONE_NUM, "886542");
+            auth = await GetLimeAuthAsync(PHONE_NUM, "389534");
 
             // Make sure we have a valid token
             if (string.IsNullOrEmpty(auth.token))

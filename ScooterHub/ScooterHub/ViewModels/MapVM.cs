@@ -24,6 +24,13 @@ namespace ScooterHub.ViewModels
             
             //birdData = new BirdData();
             limeData = new LimeData();
+            Task taskA = Task.Run(() => limeData.RunLimeAsync());
+
+            Task UITask = taskA.ContinueWith((addPins) =>
+            {
+                this.addPins();
+            }, TaskScheduler.FromCurrentSynchronizationContext());
+
 
             //addPins();
         }
@@ -60,8 +67,9 @@ namespace ScooterHub.ViewModels
                 };
 
                 map.Pins.Add(pin);
-    
             }
+
+            
         }
         private void createMap()
         {
