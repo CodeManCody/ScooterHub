@@ -13,13 +13,11 @@ namespace ScooterHub.ViewModels
     {
         private BirdData birdData;
         private LimeData limeData;
-        private MapData data;
-        private LimeAPI limeAPI;
         public Xamarin.Forms.Maps.Map map { get; private set; }
         private Xamarin.Essentials.Location currentLocation { get; set; }
+
         public MapVM()
         {
-            data = new MapData();
             createMap();
 
             limeData = new LimeData();
@@ -37,29 +35,10 @@ namespace ScooterHub.ViewModels
             {
                 this.addPins();
             }, TaskScheduler.FromCurrentSynchronizationContext());
-
-            //addPins();
         }
 
         private void addPins()
         {
-            /*
-            foreach (double[] location in data.coordinates)
-            {
-                var position = new Position(location[0], location[1]); // Latitude, Longitude
-
-                var pin = new Pin
-                {
-                    Type = PinType.Place,
-                    Position = position,
-                    Label = "custom pin",
-                    Address = "custom detail info"
-                };
-
-                map.Pins.Add(pin);
-            }
-            */
-
             foreach (var scooter in limeData.limeAPI.data.attributes.bikes)
             {
                 var position = new Position(scooter.attributes.latitude, scooter.attributes.longitude);
@@ -89,9 +68,6 @@ namespace ScooterHub.ViewModels
 
                 map.Pins.Add(pin);
             }
-
-
-
         }
         private void createMap()
         {

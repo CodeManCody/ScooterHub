@@ -9,11 +9,10 @@ namespace ScooterHub.DataModels.Bird
     public class BirdData
     {
         const string DEVICE_ID = "123E4567-E89B-12D3-A456-426655440070";
-        const string EMAIL = "yeet11236@gmail.com";
+        const string EMAIL = "lala69123@gmail.com";
         const string LATITUDE = "32.7744339"; // Campus
         const string LONGITUDE = "-117.0693269";
         const string RADIUS = "25";
-
 
         public BirdAPI birdAPI;
 
@@ -22,12 +21,6 @@ namespace ScooterHub.DataModels.Bird
         public BirdData()
         {
             birdAPI = new BirdAPI();
-            /*
-            Task.Run(async () =>
-            {
-                await RunAsync();
-            });
-            */
         }
 
         public async Task RunAsync()
