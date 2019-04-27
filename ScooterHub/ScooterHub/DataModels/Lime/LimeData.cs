@@ -7,13 +7,14 @@ using System.Net;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
+using Xamarin.Essentials;
 
 namespace ScooterHub.DataModels.Lime
 {
     public class LimeData
     {
-        const string PHONE_NUM = "16196094177"; // ex: 16195555555
-        const string TOKEN = "922280";
+        const string PHONE_NUM = "14085990774"; // ex: 16195555555
+        const string TOKEN = "678195";
         const string LATITUDE = "32.7744339"; // Campus
         const string LONGITUDE = "-117.0693269";
         const string NE_LAT = "32.777734";
@@ -31,18 +32,31 @@ namespace ScooterHub.DataModels.Lime
         // Lime ====================================================================================
         public async Task RunLimeAsync()
         {
-            /* This call will send a token to your phone. In order for this to work you must
-             * have a Lime account registered to your PHONE_NUM.
-             * You should run this line by itself to get a token texted to you.
-             * Then uncomment the rest of this method and comment the line below to actually 
-             * run the demo.
-             * Put the code you get texted in the GetLimeAuthAsync() call. */
+            /* 1. In BirdData.cs, change the EMAIL
+             * 2. In BirdData.cs, uncomment the line:  Preferences.Clear();
+             * 3. In LimeData.cs, change PHONE_NUM to your phone number 
+             * 4. In LimeData.cs, in RunLimeAsync() method, comment out everything except:  await GetLimeRegisterTokenAsync(PHONE_NUM);
+             * 5. Run project
+             * 6. In BirdData.cs, comment out the line:  Preferences.Clear(); 
+             * 7. In LimeData.cs, change TOKEN to the one texted to you 
+             * 8. In LimeData.cs, comment out the line await line and uncomment the rest of the RunLimeAsync() method 
+             * 9. Now you can keep running the project over and over without having to change emails, tokens, etc. */
             //await GetLimeRegisterTokenAsync(PHONE_NUM);
-
 
             // Auth
             LimeAuth auth = new LimeAuth();
-            auth = await GetLimeAuthAsync(PHONE_NUM, TOKEN);
+
+            if (Preferences.ContainsKey("limeAuthToken"))
+            {
+                auth.token = Preferences.Get("limeAuthToken", "default_value");
+                auth.cookie = Preferences.Get("limeAuthCookie", "defaul_value");
+            }
+            else
+            {
+                auth = await GetLimeAuthAsync(PHONE_NUM, TOKEN);
+                Preferences.Set("limeAuthToken", auth.token);
+                Preferences.Set("limeAuthCookie", auth.cookie);
+            }
 
             // Make sure we have a valid token
             if (string.IsNullOrEmpty(auth.token))
@@ -60,7 +74,6 @@ namespace ScooterHub.DataModels.Lime
                     $"Lat: {scooter.attributes.latitude}, " +
                     $"Long: {scooter.attributes.longitude}, " +
                     $"Battery: {scooter.attributes.battery_level}\n");
-
         }
 
         static async Task<Object> GetLimeRegisterTokenAsync(string phoneNum)

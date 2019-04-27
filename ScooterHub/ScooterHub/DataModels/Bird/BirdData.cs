@@ -3,13 +3,15 @@ using System.Text;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Xamarin.Essentials;
+
 
 namespace ScooterHub.DataModels.Bird
 {
     public class BirdData
     {
         const string DEVICE_ID = "123E4567-E89B-12D3-A456-426655440070";
-        const string EMAIL = "lala69123@gmail.com";
+        const string EMAIL = "mytestemail12345@gmail.com";
         const string LATITUDE = "32.7744339"; // Campus
         const string LONGITUDE = "-117.0693269";
         const string RADIUS = "25";
@@ -28,7 +30,28 @@ namespace ScooterHub.DataModels.Bird
             // Try to get bird auth token
             // Run our async Task which calls the Bird Auth API to get our auth token
             BirdAuth auth = new BirdAuth();
-            auth = await GetBirdAuthAsync(DEVICE_ID, EMAIL);
+
+            /* 1. In BirdData.cs, change the EMAIL
+             * 2. In BirdData.cs, uncomment the line:  Preferences.Clear();
+             * 3. In LimeData.cs, change PHONE_NUM to your phone number 
+             * 4. In LimeData.cs, in RunLimeAsync() method, comment out everything except:  await GetLimeRegisterTokenAsync(PHONE_NUM);
+             * 5. Run project
+             * 6. In BirdData.cs, comment out the line:  Preferences.Clear(); 
+             * 7. In LimeData.cs, change TOKEN to the one texted to you 
+             * 8. In LimeData.cs, comment out the await line and uncomment the rest of the RunLimeAsync() method 
+             * 9. Now you can keep running the project over and over without having to change emails, tokens, etc. */
+            //Preferences.Clear();
+
+            if (Preferences.ContainsKey("authToken"))
+            {
+                auth.token = Preferences.Get("authToken", "default_value");
+            }
+            else
+            {
+                auth = await GetBirdAuthAsync(DEVICE_ID, EMAIL);
+                Preferences.Set("authToken", auth.token);
+            }
+
 
             // Make sure we have a valid token
             if (string.IsNullOrEmpty(auth.token))
