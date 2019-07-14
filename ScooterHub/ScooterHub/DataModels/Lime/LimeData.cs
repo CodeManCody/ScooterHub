@@ -13,8 +13,8 @@ namespace ScooterHub.DataModels.Lime
 {
     public class LimeData
     {
-        const string PHONE_NUM = "14085990774"; // ex: 16195555555
-        const string TOKEN = "678195";
+        const string PHONE_NUM = "16196094177"; // ex: 16195555555
+        const string TOKEN = "558457";
         const string LATITUDE = "32.7744339"; // Campus
         const string LONGITUDE = "-117.0693269";
         const string NE_LAT = "32.777734";
@@ -41,8 +41,9 @@ namespace ScooterHub.DataModels.Lime
              * 7. In LimeData.cs, change TOKEN to the one texted to you 
              * 8. In LimeData.cs, comment out the line await line and uncomment the rest of the RunLimeAsync() method 
              * 9. Now you can keep running the project over and over without having to change emails, tokens, etc. */
-            //await GetLimeRegisterTokenAsync(PHONE_NUM);
 
+            //await GetLimeRegisterTokenAsync(PHONE_NUM);
+            
             // Auth
             LimeAuth auth = new LimeAuth();
 
