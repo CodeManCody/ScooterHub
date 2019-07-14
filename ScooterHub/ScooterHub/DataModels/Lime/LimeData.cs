@@ -14,7 +14,7 @@ namespace ScooterHub.DataModels.Lime
     public class LimeData
     {
         const string PHONE_NUM = "16196094177"; // ex: 16195555555
-        const string TOKEN = "558457";
+        const string TOKEN = "369004";
         const string LATITUDE = "32.7744339"; // Campus
         const string LONGITUDE = "-117.0693269";
         const string NE_LAT = "32.777734";
@@ -75,6 +75,7 @@ namespace ScooterHub.DataModels.Lime
                     $"Lat: {scooter.attributes.latitude}, " +
                     $"Long: {scooter.attributes.longitude}, " +
                     $"Battery: {scooter.attributes.battery_level}\n");
+            
         }
 
         static async Task<Object> GetLimeRegisterTokenAsync(string phoneNum)
